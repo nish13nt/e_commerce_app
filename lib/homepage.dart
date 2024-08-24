@@ -36,8 +36,9 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     final products = Provider.of<ProductProvider>(context).products;
-    int currentpage = 0;
+    int currentpage = 1;
     return Scaffold(
+      backgroundColor: Color.fromRGBO(249, 249, 249, 1),
       appBar: AppBar(
         forceMaterialTransparency: true,
         title: const Padding(
@@ -71,7 +72,7 @@ class _HomepageState extends State<Homepage> {
                 : ListView.builder(
                     itemCount: products.length,
                     itemBuilder: (context, index) {
-                      product = products[index];
+                      final product = products[index];
                       return InkWell(
                         onTap: () {
                           if (product != null) {
@@ -82,10 +83,7 @@ class _HomepageState extends State<Homepage> {
                                     ProductDetails(product: product),
                               ),
                             );
-                          } else {
-                            // Handle the error, maybe show a message to the user
-                            print('Product data is null');
-                          }
+                          } 
                         },
                         child: ProductCard(
                           title: product['tags'],
@@ -96,10 +94,7 @@ class _HomepageState extends State<Homepage> {
                       );
                     }),
           ),
-          IndexedStack(
-            index: currentpage,
-            children: [],
-          ),
+          
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
