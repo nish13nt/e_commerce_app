@@ -16,7 +16,7 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double dp=price-(price/discount);
+    double dp=price-(price*(discount/100));
     String dprice=dp.toStringAsFixed(2);
     return Card(
       margin: const EdgeInsets.all(16),
@@ -52,7 +52,7 @@ class ProductCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
-                      '-${discount}%',
+                      '-$discount%',
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -115,10 +115,10 @@ class ProductCard extends StatelessWidget {
                           decoration: TextDecoration.lineThrough,
                         ),
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       Text(
-                        '${dprice}',
-                        style: TextStyle(
+                        '$dprice',
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.red,

@@ -28,6 +28,7 @@ class _HomepageState extends State<Homepage> {
       final data = jsonDecode(res.body);
       Provider.of<ProductProvider>(context, listen: false)
           .setProducts(data['products']);
+          print(data);
     } catch (e) {
       throw e.toString();
     }
@@ -72,6 +73,9 @@ class _HomepageState extends State<Homepage> {
                 : ListView.builder(
                     itemCount: products.length,
                     itemBuilder: (context, index) {
+                      if (index >= products.length) {
+                        return const SizedBox.shrink(); // Or handle this case appropriately
+                      }
                       final product = products[index];
                       return InkWell(
                         onTap: () {
@@ -83,7 +87,7 @@ class _HomepageState extends State<Homepage> {
                                     ProductDetails(product: product),
                               ),
                             );
-                          } 
+                          }
                         },
                         child: ProductCard(
                           title: product['tags'],
@@ -94,7 +98,6 @@ class _HomepageState extends State<Homepage> {
                       );
                     }),
           ),
-          
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

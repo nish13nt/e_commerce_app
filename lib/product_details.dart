@@ -9,6 +9,7 @@ class ProductDetails extends StatelessWidget {
     double dp = product['price'] -
         (product['price'] * (product['discountPercentage'] / 100));
     String dprice = dp.toStringAsFixed(2);
+    List<String> images = List<String>.from(product['images'] ?? []);
 
     return Scaffold(
       backgroundColor: const Color.fromRGBO(249, 249, 249, 1),
@@ -30,7 +31,14 @@ class ProductDetails extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Center(
-                      child: SizedBox(
+                      child: images.length >1? 
+                      SizedBox(
+                        height: 413,
+                        child: PageView.builder(itemCount: images.length, itemBuilder: (context,index){
+                          return Image.network(images[index]);
+                        }),
+                      )
+                      :SizedBox(
                         height: 413,
                         child: Image.network(product['images'][0] as String),
                       ),
